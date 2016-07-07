@@ -4,10 +4,11 @@
 
 #total-donations-nd {
     font-size: 60px;
+    color: #FFFFFF;
 }
 
 .dc-chart g.row text {
-    fill: black;
+    fill: white;
     font-size: 12px;
 }
 
@@ -49,4 +50,9 @@
     padding-top: 4px;
     padding-bottom: 0px;
 }
-
+g.axis.x {
+    color: #ffffff;
+}
+g.axis.y {
+    color: #ffffff;
+}

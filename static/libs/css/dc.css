@@ -50,12 +50,13 @@ div.dc-chart {
 
 .dc-chart .axis path, .axis line {
     fill: none;
-    stroke: #000;
+    stroke: #FFFFFF;
     shape-rendering: crispEdges;
 }
 
 .dc-chart .axis text {
     font: 10px sans-serif;
+    fill: white;
 }
 
 .dc-chart .grid-line {
@@ -204,6 +205,7 @@ div.dc-chart {
 
 .dc-legend {
     font-size: 11px;
+    color: #FFFFFF;
 }
 
 .dc-legend-item {
@@ -218,12 +220,14 @@ div.dc-chart {
     -o-user-select: none;
     user-select: none;
     pointer-events: none;
+    color: #FFFFFF;
 }
 
 .dc-chart path.highlight {
     stroke-width: 3;
     fill-opacity: 1;
     stroke-opacity: 1;
+    color: #FFFFFF;
 }
 
 .dc-chart .highlight {
@@ -243,4 +247,7 @@ div.dc-chart {
 
 .dc-hard .number-display {
     float: none;
+}
+text.x-axis-label{
+    fill: #FFFFFF;
 }
