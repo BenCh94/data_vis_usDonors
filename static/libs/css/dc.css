@@ -134,7 +134,7 @@ div.dc-chart {
 }
 
 .dc-data-count {
-    float: right;
+    /*float: right;*/
     margin-top: 15px;
     margin-right: 15px;
 }

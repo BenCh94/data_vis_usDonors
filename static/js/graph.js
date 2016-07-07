@@ -1,8 +1,9 @@
 queue()
     .defer(d3.json, "/donorsUSA/projects")
+    .defer(d3.json, "static/us-states.json")
     .await(makeGraphs);
 
-function makeGraphs(error, projectsJson) {
+function makeGraphs(error, projectsJson, statesJson) {
     //clean projectsJson data
     var donorsUSAProjects = projectsJson;
     var dateFormat = d3.time.format("%Y-%m-%d %H:%M:%S")
@@ -33,12 +34,16 @@ function makeGraphs(error, projectsJson) {
     var fundingStatus = ndx.dimension(function (d) {
         return d["funding_status"];
     });
+    var primarySubject = ndx.dimension( function(d) {
+        return d["primary_focus_subject"];
+    });
 
     //calculate metrics
     var numProjectsByDate = dateDim.group();
     var numProjectsByResourceType = resourceTypeDim.group();
     var numProjectsByPovertyLevel = povertyLevelDim.group();
     var numProjectsByFundingStatus = fundingStatus.group();
+    var numProjectsBySubject = primarySubject.group();
     var totalDonationsByState = stateDim.group().reduceSum(function(d)
     {
         return d["total_donations"];
@@ -49,6 +54,7 @@ function makeGraphs(error, projectsJson) {
     var totalDonations = ndx.groupAll().reduceSum(function (d) {
         return d["total_donations"];
     });
+
 
     var max_state = totalDonationsByState.top(1)[0].value;
 
@@ -63,10 +69,12 @@ function makeGraphs(error, projectsJson) {
     var numberProjectsND = dc.numberDisplay("#number-projects-nd");
     var totalDonationsND = dc.numberDisplay("#total-donations-nd");
     var fundingStatusChart = dc.pieChart("#funding-chart");
+    var mappingChart = dc.geoChoroplethChart("#map-chart");
+    var subjectChart = dc.rowChart("#subject-chart");
 
-    selectField = dc.selectMenu("#menu-select")
-        .dimension(stateDim)
-        .group(stateGroup);
+    // selectField = dc.selectMenu("#menu-select")
+    //     .dimension(stateDim)
+    //     .group(stateGroup);
 
     numberProjectsND
         .formatNumber(d3.format("d"))
@@ -85,7 +93,7 @@ function makeGraphs(error, projectsJson) {
 
     timeChart
         .width(800)
-        .height(200)
+        .height(330)
         .margins({top: 10, right: 50, bottom: 30, left: 50})
         .dimension(dateDim)
         .group(numProjectsByDate)
@@ -116,6 +124,31 @@ function makeGraphs(error, projectsJson) {
         .transitionDuration(1500)
         .dimension(fundingStatus)
         .group(numProjectsByFundingStatus);
+
+    mappingChart.width(1000)
+        .height(330)
+        .dimension(stateDim)
+        .group(totalDonationsByState)
+        .colors(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"])
+        .colorDomain([0, max_state])
+        .overlayGeoJson(statesJson["features"], "state", function (d) {
+            return d.properties.name;
+        })
+        .projection(d3.geo.albersUsa()
+                    .scale(600)
+                    .translate([340, 150]))
+        .title(function (p) {
+            return "State: " + p["key"]
+                    + "\n"
+                    + "Total Donations: " + Math.round(p["value"]) + " $";
+        });
+    subjectChart
+        .width(500)
+        .height(250)
+        .dimension(primarySubject)
+        .group(numProjectsBySubject);
+
+
 
     dc.renderAll();
 

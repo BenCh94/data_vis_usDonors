@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>School Donations Dashboard</title>
-    <link rel="stylesheet" href="./static/libs/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./static/libs/css/keen-dashboards.css">
-    <link rel="stylesheet" href="./static/libs/css/dc.css">
-    <link rel="stylesheet" href="./static/css/custom.css">
-    <link rel="stylesheet" href="./static/css/introjs.css">
+    <link rel="stylesheet" href="../static/libs/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/libs/css/keen-dashboards.css">
+    <link rel="stylesheet" href="../static/libs/css/dc.css">
+    <link rel="stylesheet" href="../static/css/custom.css">
+    <link rel="stylesheet" href="../static/css/introjs.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 
@@ -36,7 +36,7 @@
                         <div class="chart-title">
                             Number of Donations
                         </div>
-                        <div class="chart-stage">
+                        <div class="time-chart chart-stage">
                             <div id="time-chart" data-step="1"
                                  data-intro="This bar chart shows the total number of donations over the years"
                                  style="font-weight: normal" data-position="right"></div>
@@ -44,59 +44,91 @@
                     </div>
                 </div>
 
+
+                <div class="col-sm-6">
+                    <div class="chart-wrapper">
+                        <div class="chart-title">
+                            Map of Donations
+                        </div>
+                        <div class="chart-stage">
+                            <div id="map-chart" data-step="2"
+                                 data-intro="This chart maps the donations by state"
+                                 style="font-weight: normal" data-position="left"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
                 <div class="col-sm-3">
                     <div class="chart-wrapper">
                         <div class="chart-title">
                             Resource Type
                         </div>
                         <div class="chart-stage">
-                            <div id="resource-type-row-chart" data-step="2"
+                            <div id="resource-type-row-chart" data-step="3"
                                  data-intro="Here we show what the donation money was used to purchase"
                                  style="font-weight: normal" data-position="right"></div>
                         </div>
                     </div>
                 </div>
 
+
                 <div class="col-sm-3">
+                    <div class="chart-wrapper">
+                        <div class="chart-title">
+                            Poverty Level
+                        </div>
+                        <div class="chart-stage">
+                            <div id="poverty-level-row-chart" data-step="4"
+                                 data-intro="Here we see the poverty level of the areas that received donations"
+                                 style="font-weight: normal" data-position="right"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="chart-wrapper">
+                        <div class="chart-title">
+                        Total Projects by Subject
+                        </div>
+                        <div class="chart-stage">
+                            <div id="subject-chart" data-step="5"
+                                data-intro="Number of projects in each subject area"
+                                style="font-weight: normal" data-position="left"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
                     <div class="chart-wrapper">
                         <div class="chart-title">
                             Funding Status
                         </div>
                         <div class="chart-stage">
-                            <div id="funding-chart" data-step="3"
-                                 data-intro="This pie chart shows the percentage of item requests that received funding"
-                                 style="font-weight: normal" data-position="left"></div>
+                            <div id="funding-chart" data-step="6"
+                                data-intro="This pie chart shows the percentage of item requests that received funding"
+                                style="font-weight: normal" data-position="left"></div>
                         </div>
                     </div>
                 </div>
 
 
-            </div>
-        </div>
 
-        <div class="col-sm-3">
-            <div class="chart-wrapper">
-                <div class="chart-title">
-                    Poverty Level
-                </div>
-                <div class="chart-stage">
-                    <div id="poverty-level-row-chart" data-step="4"
-                         data-intro="Here we see the poverty level of the areas that received donations"
-                         style="font-weight: normal" data-position="right"></div>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-sm-1">
-            <div class="chart-wrapper">
-                <div class="chart-title">
-                    Donation State
-                </div>
-                <div class="chart-stage" data-step="5"
-                     data-intro="Select each state to see the total donations from the selected state"
-                     style="font-weight: normal" data-position="left">
-                    <div id="menu-select"></div>
-                </div>
+{#                <div class="col-sm-2">#}
+{#                    <div class="chart-wrapper">#}
+{#                        <div class="chart-title">#}
+{#                            Donation State#}
+{#                        </div>#}
+{#                        <div class="chart-stage" data-step="6"#}
+{#                             data-intro="Select each state to see the total donations from the selected state"#}
+{#                             style="font-weight: normal" data-position="left">#}
+{#                            <div id="menu-select"></div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+
             </div>
         </div>
         {##}
@@ -124,7 +156,9 @@
             {#
         </div>
         #}
+        <div class="col-sm-4">
 
+        </div>
         <div class="col-sm-2">
             <div class="chart-wrapper">
                 <div class="chart-title">
@@ -139,8 +173,8 @@
             text-align: center;
             padding-top: 12px;
             padding-bottom: 0px;
-            " data-step="6" data-intro="Total number of donations depending on user selection"
-                     style="font-weight: normal" data-position="left">
+            " data-step="7" data-intro="Total number of donations depending on user selection"
+                     style="font-weight: normal" data-position="right">
                     <div id="number-projects-nd"></div>
                 </div>
             </div>
@@ -152,13 +186,12 @@
                     Total Donations in USD
                 </div>
                 <div class="chart-stage">
-                    <div id="total-donations-nd" data-step="7"
+                    <div id="total-donations-nd" data-step="8"
                          data-intro="Total value of donations depending on user selection in USD"
                          style="font-weight: normal" data-position="left"></div>
                 </div>
             </div>
         </div>
-
 
     </div>
 
@@ -168,15 +201,15 @@
 </div>
 
 
-<script src="./static/libs/js/jquery.min.js"></script>
-<script src="./static/libs/js/bootstrap.min.js"></script>
-<script src="./static/libs/js/crossfilter.js"></script>
-<script src="./static/libs/js/d3.js"></script>
-<script src="./static/libs/js/dc.js"></script>
-<script src="./static/libs/js/queue.js"></script>
-<script src="./static/libs/js/keen.min.js"></script>
-<script src="./static/js/graph.js" type="text/javascript"></script>
-<script src="./static/js/intro.js" type="text/javascript"></script>
+<script src="../static/libs/js/jquery.min.js"></script>
+<script src="../static/libs/js/bootstrap.min.js"></script>
+<script src="../static/libs/js/crossfilter.js"></script>
+<script src="../static/libs/js/d3.js"></script>
+<script src="../static/libs/js/dc.js"></script>
+<script src="../static/libs/js/queue.js"></script>
+<script src="../static/libs/js/keen.min.js"></script>
+<script src="../static/js/graph.js" type="text/javascript"></script>
+<script src="../static/js/intro.js" type="text/javascript"></script>
 
 </body>
 </html>

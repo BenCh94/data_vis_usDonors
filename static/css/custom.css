@@ -50,9 +50,11 @@
     padding-top: 4px;
     padding-bottom: 0px;
 }
-g.axis.x {
-    color: #ffffff;
+@media (min-width: 1500px) div #time-chart .dc-chart svg {
+    width: 90%;
+    height: 200px;
 }
-g.axis.y {
-    color: #ffffff;
+@media (min-width: 1px) div #time-chart .dc-chart svg {
+    width: 90%;
+    height: 220px;
 }
