@@ -104,14 +104,14 @@ function makeGraphs(error, projectsJson, statesJson) {
         .yAxis().ticks(4);
 
     resourceTypeChart
-        .width(300)
+        .width(400)
         .height(250)
         .dimension(resourceTypeDim)
         .group(numProjectsByResourceType)
         .xAxis().ticks(4);
 
     povertyLevelChart
-        .width(300)
+        .width(400)
         .height(250)
         .dimension(povertyLevelDim)
         .group(numProjectsByPovertyLevel)
@@ -143,7 +143,7 @@ function makeGraphs(error, projectsJson, statesJson) {
                     + "Total Donations: " + Math.round(p["value"]) + " $";
         });
     subjectChart
-        .width(500)
+        .width(550)
         .height(250)
         .dimension(primarySubject)
         .group(numProjectsBySubject);
