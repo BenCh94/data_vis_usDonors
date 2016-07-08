@@ -3,6 +3,8 @@ queue()
     .defer(d3.json, "static/us-states.json")
     .await(makeGraphs);
 
+
+
 function makeGraphs(error, projectsJson, statesJson) {
     //clean projectsJson data
     var donorsUSAProjects = projectsJson;
@@ -55,7 +57,7 @@ function makeGraphs(error, projectsJson, statesJson) {
         return d["total_donations"];
     });
 
-
+    // var maxSub = numProjectsBySubject.top(1)[0]["primary_focus_subject"];
     var max_state = totalDonationsByState.top(1)[0].value;
 
     //define values (to be used in charts)
@@ -70,7 +72,7 @@ function makeGraphs(error, projectsJson, statesJson) {
     var totalDonationsND = dc.numberDisplay("#total-donations-nd");
     var fundingStatusChart = dc.pieChart("#funding-chart");
     var mappingChart = dc.geoChoroplethChart("#map-chart");
-    var subjectChart = dc.rowChart("#subject-chart");
+    var subjectChart = dc.pieChart("#subject-chart");
 
     // selectField = dc.selectMenu("#menu-select")
     //     .dimension(stateDim)
@@ -118,7 +120,7 @@ function makeGraphs(error, projectsJson, statesJson) {
         .xAxis().ticks(4);
 
     fundingStatusChart
-        .height(220)
+        .height(250)
         .radius(90)
         .innerRadius(40)
         .transitionDuration(1500)
@@ -146,7 +148,11 @@ function makeGraphs(error, projectsJson, statesJson) {
         .width(550)
         .height(250)
         .dimension(primarySubject)
-        .group(numProjectsBySubject);
+        .group(numProjectsBySubject)
+        .innerRadius(50)
+        .externalLabels(100000)
+        .transitionDuration(1500);
+
 
 
 
