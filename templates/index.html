@@ -9,9 +9,15 @@
     <link rel="stylesheet" href="../static/css/custom.css">
     <link rel="stylesheet" href="../static/css/introjs.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+        jQuery(window).load(function(){
+            jQuery('#divLoading').fadeOut(10000);
+        });
+    </script>
 </head>
 
 <body class="application">
+<div id="divLoading"></div>
 
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">

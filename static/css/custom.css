@@ -50,11 +50,10 @@
     padding-top: 4px;
     padding-bottom: 0px;
 }
-@media (min-width: 1500px) div #time-chart .dc-chart svg {
-    width: 90%;
-    height: 200px;
-}
-@media (min-width: 1px) div #time-chart .dc-chart svg {
-    width: 90%;
-    height: 220px;
+#divLoading {
+    background: #000 url(../hold_on.gif) no-repeat center center;
+    height: auto;
+    width: auto;
+    position: fixed;
+    z-index: 1000;
 }
